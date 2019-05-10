@@ -1,3 +1,7 @@
+THIS IS A FORK
+==================
+I forked DMAudioStreamer in order to avoid the AndroidX updates in the upsream repo. The goal is to keep functionality and updates consistent with the upstream, but just not upgrade to AndroidX. I'm sure AndroidX is great, but it's too new for my React Native project.
+
 DMAudioStreamer
 ==================
 
@@ -34,7 +38,7 @@ allprojects {
 ```
 ```xml
 dependencies {
-    compile 'com.github.dibakarece:dmaudiostreamer:v1.0.3'
+    compile 'com.github.asutula:dmaudiostreamer:v1.0.5'
 }
 ```
 

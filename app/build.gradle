@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId "dm.audiostreamerdemo"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 4
         versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,12 +19,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(path: ':dmaudiostreamer')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(path: ':dmaudiostreamer')
     //compile 'com.github.dibakarece:dmaudiostreamer:v1.0.3'
-    compile'com.nineoldandroids:library:2.4.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.google.code.gson:gson:2.6.2'
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
