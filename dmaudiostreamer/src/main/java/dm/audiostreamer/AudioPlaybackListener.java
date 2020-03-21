@@ -10,9 +10,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.PowerManager;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.text.TextUtils;
@@ -141,7 +143,18 @@ public class AudioPlaybackListener implements PlaybackListener, AudioManager.OnA
             try {
                 createMediaPlayerIfNeeded();
                 mState = PlaybackStateCompat.STATE_BUFFERING;
-                mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                // mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                // hotfix: https://stackoverflow.com/questions/41226421/android-mediaplayer-shows-error-1-19
+
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    mMediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build());
+                } else {
+                    mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                }
+
                 mMediaPlayer.setDataSource(source);
 
                 mMediaPlayer.prepareAsync();
@@ -274,6 +287,7 @@ public class AudioPlaybackListener implements PlaybackListener, AudioManager.OnA
                 mPlayOnFocusGain = false;
             }
         }
+
         if (mCallback != null) {
             mCallback.onPlaybackStatusChanged(mState);
         }
